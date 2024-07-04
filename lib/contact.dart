@@ -59,17 +59,17 @@ class ContactPage extends StatelessWidget {
             const SizedBox(height: 10),
             ContactItem(
               name: 'Akbar Serdano',
-              contact: '+62852XXXXXX',
+              contact: '+62852XXXXX',
               type: 'WA',
             ),
             ContactItem(
               name: 'Akbar Serdano',
-              contact: '+62852XXXXXX',
+              contact: '+62852XXXXX',
               type: 'WA',
             ),
             ContactItem(
               name: 'Akbar Serdano',
-              contact: '+62852XXXXXX',
+              contact: '+62852XXXXX',
               type: 'WA',
             ),
             const SizedBox(height: 16.0),
