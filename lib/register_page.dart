@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +77,7 @@ class RegisterPage extends StatelessWidget {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF333B45),
+                backgroundColor: const Color(0xFF333B45),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.zero,
                 )),
