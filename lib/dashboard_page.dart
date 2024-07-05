@@ -1,15 +1,38 @@
+import 'package:aplikasi_pendataan_alat_tulis_kantor/dashboard_pages.dart/home_page.dart';
+import 'package:aplikasi_pendataan_alat_tulis_kantor/dashboard_pages.dart/profile_page.dart';
+import 'package:aplikasi_pendataan_alat_tulis_kantor/dashboard_pages.dart/search_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
+
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    DashboardHomePage(),
+    SearchPage(),
+    DashboardProfilePage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Aplikasi Data BMN ATK',
           style: TextStyle(
             color: Colors.white,
@@ -20,7 +43,7 @@ class DashboardPage extends StatelessWidget {
         backgroundColor: Colors.blue.withOpacity(0.85),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.menu,
             color: Colors.white,
           ),
@@ -129,92 +152,44 @@ class DashboardPage extends StatelessWidget {
                       color: Colors.white.withOpacity(0.8),
                     )),
               ),
-            )
+            ),
+            const SizedBox(height: 20),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/adminDashboard');
+              },
+              child: ListTile(
+                leading: const Icon(Icons.admin_panel_settings),
+                title: Text('Login as Admin',
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(0.8),
+                    )),
+              ),
+            ),
           ],
         ),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          Image.asset(
-            'logo-color.png',
-            height: 150,
-            width: 185,
-            fit: BoxFit.contain,
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-          const SizedBox(height: 20),
-          Container(
-            height: 1.0,
-            width: 250,
-            color: Colors.red,
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
-          const SizedBox(height: 10),
-          Text(
-            'Menu Data ATK',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.purple.withOpacity(0.55),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            height: 1.0,
-            width: 325,
-            color: Colors.red,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GridView.count(
-                crossAxisCount: 3,
-                childAspectRatio: 1.5,
-                crossAxisSpacing: 2.0,
-                mainAxisSpacing: 2.0,
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/persediaanBarang');
-                      },
-                      child: MenuButton(title: 'Persediaan\nBarang ATK')),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/tambahItem');
-                      },
-                      child: MenuButton(title: 'Tambah Item\nATK')),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/permintaanBarang');
-                      },
-                      child: MenuButton(title: 'Permintaan/\nPersetujuan ATK')),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/pengambilanBarang');
-                      },
-                      child: MenuButton(title: 'Pengambilan\nATK')),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/contact');
-                      },
-                      child: MenuButton(title: 'Contact')),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/profile');
-                      },
-                      child: MenuButton(title: 'Edit Profil')),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/tambahBarangAdmin');
-                      },
-                      child: MenuButton(title: 'Tambah Item ATK Admin')),
-                  MenuButton(title: ''),
-                  MenuButton(title: ''),
-                ],
-              ),
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: _onItemTapped,
       ),
     );
   }
@@ -222,26 +197,48 @@ class DashboardPage extends StatelessWidget {
 
 class MenuButton extends StatelessWidget {
   final String title;
+  final IconData icon;
 
-  MenuButton({required this.title});
+  const MenuButton({
+    super.key,
+    required this.title,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.85),
-        borderRadius: BorderRadius.circular(0),
-      ),
-      child: Center(
-        child: Text(
-          title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
           ),
-        ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 40,
+            color: Colors.blue,
+          ),
+          const SizedBox(height: 10),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
+            ),
+          ),
+        ],
       ),
     );
   }
