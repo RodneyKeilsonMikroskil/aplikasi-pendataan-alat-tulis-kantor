@@ -1,4 +1,4 @@
-import 'package:aplikasi_pendataan_alat_tulis_kantor/dashboard_page.dart';
+import 'package:aplikasi_pendataan_alat_tulis_kantor/menu_button.dart';
 import 'package:flutter/material.dart';
 
 class DashboardHomePage extends StatelessWidget {
@@ -6,6 +6,15 @@ class DashboardHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Brightness themeBrightness = Theme.of(context).brightness;
+
+    Color titleColor =
+        themeBrightness == Brightness.dark ? Colors.grey : Colors.blue;
+    Color lineColor =
+        themeBrightness == Brightness.dark ? Colors.grey : Colors.blue;
+    Color buttonColor =
+        themeBrightness == Brightness.dark ? Colors.grey : Colors.blue;
+
     return Column(
       children: [
         const SizedBox(height: 20),
@@ -19,23 +28,23 @@ class DashboardHomePage extends StatelessWidget {
         Container(
           height: 1.0,
           width: 250,
-          color: Colors.blue,
+          color: lineColor,
         ),
         const SizedBox(height: 10),
-        const Text(
+        Text(
           'Menu Data ATK',
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.blue,
+            color: titleColor,
           ),
         ),
         const SizedBox(height: 10),
         Container(
           height: 1.0,
           width: 325,
-          color: Colors.blue,
+          color: lineColor,
         ),
         const SizedBox(height: 10),
         Expanded(
@@ -47,47 +56,53 @@ class DashboardHomePage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/permintaanBarangForm');
+                  Navigator.pushNamed(context, '/persediaanBarang');
                 },
-                child: const MenuButton(
-                  title: 'Permintaan/Persetujuan ATK',
-                  icon: Icons.request_page,
+                child: MenuButton(
+                  title: 'Persediaan ATK',
+                  icon: Icons.inventory,
+                  color: buttonColor,
                 ),
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/pengambilanBarangForm');
+                  Navigator.pushNamed(context, '/permintaanBarangForm');
                 },
-                child: const MenuButton(
-                  title: 'Pengambilan ATK',
+                child: MenuButton(
+                  title: 'Permintaan ATK',
+                  icon: Icons.request_page,
+                  color: buttonColor,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/pengambilanBarang');
+                },
+                child: MenuButton(
+                  title: 'Riwayat Persetujuan ATK',
                   icon: Icons.shopping_cart,
+                  color: buttonColor,
                 ),
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, '/contact');
                 },
-                child: const MenuButton(
+                child: MenuButton(
                   title: 'Contact',
                   icon: Icons.contact_mail,
+                  color: buttonColor,
                 ),
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, '/profile');
                 },
-                child: const MenuButton(
+                child: MenuButton(
                   title: 'Profil',
                   icon: Icons.person,
+                  color: buttonColor,
                 ),
-              ),
-              const MenuButton(
-                title: 'Coming Soon',
-                icon: Icons.watch_later,
-              ),
-              const MenuButton(
-                title: 'Coming Soon',
-                icon: Icons.watch_later,
               ),
             ],
           ),

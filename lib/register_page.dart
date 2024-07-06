@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
+      ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Image.asset(
@@ -75,7 +81,7 @@ class RegisterPage extends StatelessWidget {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF333B45),
+                backgroundColor: const Color(0xFF333B45),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.zero,
                 )),
@@ -113,10 +119,12 @@ class RegisterPage extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, '/login');
                   },
-                  child: const Text(
+                  child: Text(
                     'Login',
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: isDarkMode
+                          ? const Color.fromARGB(255, 176, 176, 176)
+                          : Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
+      ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Image.asset(
@@ -30,7 +37,7 @@ class ProfilePage extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           const Text(
-            'Akbar Serdano',
+            'Profile',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
@@ -46,42 +53,13 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          const TextField(
-            decoration: InputDecoration(
-              hintText: 'Full Name',
-              constraints: BoxConstraints(maxWidth: 300.0),
-            ),
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              hintText: 'Email',
-              constraints: BoxConstraints(maxWidth: 300.0),
-            ),
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              hintText: 'Old Password',
-              constraints: BoxConstraints(maxWidth: 300.0),
-            ),
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              hintText: 'New Password',
-              constraints: BoxConstraints(maxWidth: 300.0),
-            ),
-          ),
-          const TextField(
-            decoration: InputDecoration(
-              hintText: 'Re-New Password',
-              constraints: BoxConstraints(maxWidth: 300.0),
-            ),
-          ),
+          const Text("Coming soon."),
           const SizedBox(
             height: 20,
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF333B45),
+                backgroundColor: const Color(0xFF333B45),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.zero,
                 )),
@@ -89,7 +67,7 @@ class ProfilePage extends StatelessWidget {
               Navigator.pushNamed(context, '/dashboard');
             },
             child: const Text(
-              'SIMPAN',
+              'KEMBALI',
               style: TextStyle(color: Colors.white),
             ),
           ),

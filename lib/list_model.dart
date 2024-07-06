@@ -45,12 +45,29 @@ class ItemRow {
     required this.jumlah,
     required this.satuan,
   });
+
+  ItemRow copyWith({
+    String? kodeatk,
+    String? namaatk,
+    String? jenis,
+    String? jumlah,
+    String? satuan,
+  }) {
+    return ItemRow(
+      kodeatk: kodeatk ?? this.kodeatk,
+      namaatk: namaatk ?? this.namaatk,
+      jenis: jenis ?? this.jenis,
+      jumlah: jumlah ?? this.jumlah,
+      satuan: satuan ?? this.satuan,
+    );
+  }
 }
 
 class RequestCard2 {
   final String programstudi;
   final String tanggalpermintaan;
   final String quantity;
+  final String namaatk; // Add this field
   bool isCheckVisible;
   bool isRemoveVisible;
 
@@ -58,6 +75,7 @@ class RequestCard2 {
     required this.programstudi,
     required this.tanggalpermintaan,
     required this.quantity,
+    required this.namaatk, // Add this parameter
     this.isCheckVisible = true,
     this.isRemoveVisible = true,
   });

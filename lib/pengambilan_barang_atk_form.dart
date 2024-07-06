@@ -31,6 +31,8 @@ class _PengambilanBarangFormState extends State<PengambilanBarangForm> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -41,23 +43,17 @@ class _PengambilanBarangFormState extends State<PengambilanBarangForm> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.blue.withOpacity(0.85),
+        backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios_new,
             color: Colors.white,
           ),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Consumer<RequestViewModel>(
         builder: (context, viewModel, child) {

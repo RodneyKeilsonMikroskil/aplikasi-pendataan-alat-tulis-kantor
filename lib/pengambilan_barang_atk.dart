@@ -1,148 +1,107 @@
+import 'package:aplikasi_pendataan_alat_tulis_kantor/list_model.dart';
+import 'package:aplikasi_pendataan_alat_tulis_kantor/providers/pengambilan_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class PengambilanBarang extends StatefulWidget {
+class PengambilanPage extends StatefulWidget {
+  final List<ItemRow> items;
+
+  const PengambilanPage({required this.items, super.key});
+
   @override
-  _PengambilanBarangState createState() => _PengambilanBarangState();
+  _PengambilanPageState createState() => _PengambilanPageState();
 }
 
-class _PengambilanBarangState extends State<PengambilanBarang> {
+class _PengambilanPageState extends State<PengambilanPage> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  void _showDialogTaken(BuildContext context, ItemRow item) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Item Taken'),
+          content: Text('${item.namaatk} has been taken.'),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         title: const Text(
-          'Pengambilan Barang ATK',
+          'Riwayat Persetujuan ATK',
           style: TextStyle(
             color: Colors.white,
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.blue.withOpacity(0.85),
+        backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios_new,
             color: Colors.white,
           ),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white),
-            onPressed: () {},
-          ),
-        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: Consumer<PengambilanViewModel>(
+        builder: (context, viewModel, child) {
+          final items = viewModel.items;
+          return Column(
             children: [
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Program Studi',
+              Expanded(
+                child: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    final item = items[index];
+                    return Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.namaatk,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text('Jumlah: ${item.jumlah} ${item.satuan}'),
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _showDialogTaken(context, item);
+                              },
+                              child: const Icon(
+                                Icons.check_circle,
+                                color: Colors.green,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Tanggal Permintaan',
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Permintaan ATK",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const Text(
-                "Kertas A4\nKertas F4\nPulpen",
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Tanggal Pengambilan',
-                ),
-              ),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Nama Penerima',
-                ),
-              ),
-              const SizedBox(height: 20),
-              Center(
-                  child: SizedBox(
-                width: 300,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF333B45),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.zero,
-                        )),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/dashboard');
-                    },
-                    child: const Text('UPLOAD IMAGE',
-                        style: TextStyle(color: Colors.white))),
-              )),
-              const SizedBox(height: 20),
-              Center(
-                  child: Container(
-                      height: 150,
-                      width: 295,
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 100, 105, 111)))),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width *
-                        0.08, // 10% of screen width
-                  ),
-                  Expanded(
-                      flex: 2,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF333B45),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.zero,
-                              )),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/dashboard');
-                          },
-                          child: const Text('SIMPAN',
-                              style: TextStyle(color: Colors.white)))),
-                  const SizedBox(width: 10),
-                  Expanded(
-                      flex: 2,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF333B45),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.zero,
-                              )),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/dashboard');
-                          },
-                          child: const Text('RESET',
-                              style: TextStyle(color: Colors.white)))),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width *
-                        0.08, // 10% of screen width
-                  ),
-                ],
               ),
             ],
-          ),
-        ),
+          );
+        },
       ),
     );
   }

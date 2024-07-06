@@ -1,24 +1,25 @@
-import 'package:aplikasi_pendataan_alat_tulis_kantor/dashboard_pages/home_page.dart';
-import 'package:aplikasi_pendataan_alat_tulis_kantor/dashboard_pages/profile_page.dart';
-import 'package:aplikasi_pendataan_alat_tulis_kantor/dashboard_pages/search_page.dart';
+import 'package:aplikasi_pendataan_alat_tulis_kantor/admin_pages/admin_home_page.dart';
+import 'package:aplikasi_pendataan_alat_tulis_kantor/admin_pages/admin_profile_page.dart';
+import 'package:aplikasi_pendataan_alat_tulis_kantor/admin_pages/admin_search_page.dart';
+
 import 'package:flutter/material.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+class AdminDashboardPage extends StatefulWidget {
+  const AdminDashboardPage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<AdminDashboardPage> createState() => _AdminDashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _AdminDashboardPageState extends State<AdminDashboardPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    DashboardHomePage(),
-    SearchPage(),
-    DashboardProfilePage(),
+    AdminDashboardHomePage(),
+    AdminSearchPage(),
+    AdminDashboardProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -119,18 +120,6 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/feedback');
-              },
-              child: ListTile(
-                leading: const Icon(Icons.feedback),
-                title: Text('Feedback',
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.8),
-                    )),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
                 Navigator.pushNamed(context, '/');
               },
               child: ListTile(
@@ -144,11 +133,11 @@ class _DashboardPageState extends State<DashboardPage> {
             const SizedBox(height: 20),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/adminDashboard');
+                Navigator.pushNamed(context, '/dashboard');
               },
               child: ListTile(
                 leading: const Icon(Icons.admin_panel_settings),
-                title: Text('Login as Admin',
+                title: Text('Login as User',
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.8),
                     )),

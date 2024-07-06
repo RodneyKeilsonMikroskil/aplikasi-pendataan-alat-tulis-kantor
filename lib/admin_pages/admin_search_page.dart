@@ -1,17 +1,15 @@
-import 'package:aplikasi_pendataan_alat_tulis_kantor/dashboard_page.dart';
+import 'package:aplikasi_pendataan_alat_tulis_kantor/menu_button.dart';
 import 'package:flutter/material.dart';
 
-// ... (previous code remains the same) ...
-
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+class AdminSearchPage extends StatefulWidget {
+  const AdminSearchPage({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _SearchPageState createState() => _SearchPageState();
+  _AdminSearchPageState createState() => _AdminSearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _AdminSearchPageState extends State<AdminSearchPage> {
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, dynamic>> _searchResults = [];
   bool _showOnlyAvailable = false;
@@ -20,17 +18,11 @@ class _SearchPageState extends State<SearchPage> {
     {
       'title': 'Persediaan Barang ATK',
       'icon': Icons.inventory,
-      'route': '/persediaanBarang',
+      'route': '/persediaanBarangAdmin',
       'available': true,
     },
     {
-      'title': 'Tambah Item ATK',
-      'icon': Icons.add_circle,
-      'route': '/tambahItem',
-      'available': true,
-    },
-    {
-      'title': 'Permintaan/Persetujuan ATK',
+      'title': 'Persetujuan ATK',
       'icon': Icons.request_page,
       'route': '/permintaanBarang',
       'available': true,
@@ -53,24 +45,6 @@ class _SearchPageState extends State<SearchPage> {
       'route': '/profile',
       'available': true,
     },
-    {
-      'title': 'Tambah Item ATK Admin',
-      'icon': Icons.admin_panel_settings,
-      'route': '/tambahBarangAdmin',
-      'available': true,
-    },
-    {
-      'title': 'Coming Soon',
-      'icon': Icons.watch_later,
-      'route': '#',
-      'available': false,
-    },
-    {
-      'title': 'Coming Soon',
-      'icon': Icons.watch_later,
-      'route': '#',
-      'available': false,
-    },
   ];
 
   void _performSearch(String query) {
@@ -84,6 +58,10 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    Brightness themeBrightness = Theme.of(context).brightness;
+
+    Color buttonColor =
+        themeBrightness == Brightness.dark ? Colors.grey : Colors.blue;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Search'),
@@ -112,7 +90,7 @@ class _SearchPageState extends State<SearchPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Show Only Available',
                   style: TextStyle(
                     fontSize: 16,
@@ -146,6 +124,7 @@ class _SearchPageState extends State<SearchPage> {
                       child: MenuButton(
                         title: item['title'],
                         icon: item['icon'],
+                        color: buttonColor,
                       ),
                     ),
                   )

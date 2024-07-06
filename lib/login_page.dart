@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -63,7 +67,7 @@ class LoginPage extends StatelessWidget {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF333B45),
+                backgroundColor: const Color(0xFF333B45),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.zero,
                 )),
@@ -76,12 +80,26 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/adminDashboard');
+            },
+            child: Text(
+              'Login as Admin',
+              style: TextStyle(
+                color: isDarkMode
+                    ? const Color.fromARGB(255, 176, 176, 176)
+                    : Colors.blue,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width *
-                    0.1,
+                width: MediaQuery.of(context).size.width * 0.1,
               ),
               const Expanded(
                 flex: 8,
@@ -99,18 +117,19 @@ class LoginPage extends StatelessWidget {
                   onTap: () {
                     Navigator.pushNamed(context, '/register');
                   },
-                  child: const Text(
+                  child: Text(
                     'Register',
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: isDarkMode
+                          ? const Color.fromARGB(255, 176, 176, 176)
+                          : Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width *
-                    0.1,
+                width: MediaQuery.of(context).size.width * 0.1,
               ),
             ],
           ),
@@ -119,10 +138,12 @@ class LoginPage extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, '/forgotPassword');
             },
-            child: const Text(
+            child: Text(
               'Forgot Password?',
               style: TextStyle(
-                color: Colors.blue,
+                color: isDarkMode
+                    ? const Color.fromARGB(255, 176, 176, 176)
+                    : Colors.blue,
                 fontWeight: FontWeight.bold,
               ),
             ),

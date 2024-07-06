@@ -5,8 +5,14 @@ class DashboardProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDarkMode = theme.brightness == Brightness.dark;
+
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false,),
+      appBar: AppBar(
+        // automaticallyImplyLeading: false,
+        backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
+      ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Image.asset(
@@ -16,49 +22,57 @@ class DashboardProfilePage extends StatelessWidget {
             fit: BoxFit.contain,
           ),
           const SizedBox(height: 20),
-          const Text(
+          Text(
             'Aplikasi Pendataan\nATK (Alat Tulis Kantor)',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.blue
+              color: isDarkMode
+                  ? const Color.fromARGB(255, 96, 95, 95)
+                  : Colors.blue,
             ),
           ),
           const SizedBox(height: 20),
           Container(
             height: 1.0,
             width: 250,
-            color: Colors.blue,
+            color: isDarkMode
+                ? const Color.fromARGB(255, 96, 95, 95)
+                : Colors.blue,
           ),
           const SizedBox(height: 10),
-          const Text(
+          Text(
             'Profile',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.blue
+              color: isDarkMode
+                  ? const Color.fromARGB(255, 96, 95, 95)
+                  : Colors.blue,
             ),
           ),
           const SizedBox(height: 10),
           Container(
             height: 1.0,
             width: 325,
-            color: Colors.blue,
+            color: isDarkMode
+                ? const Color.fromARGB(255, 96, 95, 95)
+                : Colors.blue,
           ),
-          const SizedBox(
-            height: 20,
+          const SizedBox(height: 20),
+          Text(
+            'Coming soon.',
+            style: TextStyle(
+              fontSize: 16,
+              color: isDarkMode ? Colors.white70 : Colors.black,
+            ),
           ),
-          const Text("Coming soon."),
-          const SizedBox(
-            height: 20,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
         ]),
       ),
+      backgroundColor: isDarkMode ? Colors.black : Colors.white,
     );
   }
 }

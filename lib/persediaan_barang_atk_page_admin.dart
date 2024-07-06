@@ -1,18 +1,19 @@
 import 'package:aplikasi_pendataan_alat_tulis_kantor/providers/persediaan_view_model.dart';
+import 'package:aplikasi_pendataan_alat_tulis_kantor/tambah_barang_atk_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_pendataan_alat_tulis_kantor/list_model.dart';
 import 'package:provider/provider.dart';
 
-class PersediaanBarangATKPage extends StatefulWidget {
+class PersediaanBarangATKPageAdmin extends StatefulWidget {
   final List<ItemRow> items;
-  const PersediaanBarangATKPage({required this.items, super.key});
+  const PersediaanBarangATKPageAdmin({required this.items, super.key});
 
   @override
   // ignore: library_private_types_in_public_api
   _PersediaanBarangATKState createState() => _PersediaanBarangATKState();
 }
 
-class _PersediaanBarangATKState extends State<PersediaanBarangATKPage> {
+class _PersediaanBarangATKState extends State<PersediaanBarangATKPageAdmin> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
@@ -87,6 +88,19 @@ class _PersediaanBarangATKState extends State<PersediaanBarangATKPage> {
           ],
         );
       }),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MakeItems(
+                        itemsv1: widget.items,
+                      )));
+        },
+        shape: const CircleBorder(),
+        child: const Icon(Icons.add, color: Colors.white),
+      ),
     );
   }
 }
