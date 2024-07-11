@@ -5,12 +5,12 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDarkMode = theme.brightness == Brightness.dark;
+    // final theme = Theme.of(context);
+    // final isDarkMode = theme.brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
+        // backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [

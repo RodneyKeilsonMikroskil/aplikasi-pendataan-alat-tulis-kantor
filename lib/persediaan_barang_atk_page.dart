@@ -32,14 +32,8 @@ class _PersediaanBarangATKState extends State<PersediaanBarangATKPage> {
         ),
         backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
         centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        iconTheme: IconThemeData(
+          color: isDarkMode ? Colors.grey : Colors.white,
         ),
       ),
       body: Consumer<PersediaanViewModel>(builder: (context, viewModel, child) {

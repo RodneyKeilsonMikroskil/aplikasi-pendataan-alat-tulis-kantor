@@ -56,12 +56,6 @@ class _PermintaanBarangFormState extends State<PermintaanBarangForm> {
           },
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.white),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Consumer<PersediaanViewModel>(
         builder: (context, persediaanViewModel, child) {

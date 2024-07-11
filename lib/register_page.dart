@@ -9,7 +9,6 @@ class RegisterPage extends StatelessWidget {
     final isDarkMode = theme.brightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [

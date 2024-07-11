@@ -61,12 +61,6 @@ class _TambahItemATKPageState extends State<TambahItemATKPage> {
               _key.currentState!.openDrawer();
             },
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search, color: Colors.white),
-              onPressed: () {},
-            ),
-          ],
         ),
         drawer: Drawer(
           backgroundColor: Colors.black.withOpacity(0.6),

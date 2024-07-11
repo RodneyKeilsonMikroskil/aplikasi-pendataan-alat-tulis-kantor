@@ -50,7 +50,7 @@ class _TambahItemATKPageAdminState extends State<TambahItemATKPageAdmin> {
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(
-              Icons.arrow_back_ios_new,
+              Icons.arrow_back,
               color: Colors.white,
             ),
             onPressed: () {
@@ -103,27 +103,6 @@ class _TambahItemATKPageAdminState extends State<TambahItemATKPageAdmin> {
                     );
                   }).toList(),
                 ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: 300,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF333B45),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
-                          )),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/dashboard');
-                      },
-                      child: const Text('UPLOAD IMAGE',
-                          style: TextStyle(color: Colors.white))),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                    height: 150,
-                    width: 295,
-                    decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 100, 105, 111))),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

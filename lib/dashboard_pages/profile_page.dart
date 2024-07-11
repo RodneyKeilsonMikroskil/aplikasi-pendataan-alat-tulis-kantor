@@ -10,8 +10,7 @@ class DashboardProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        // automaticallyImplyLeading: false,
-        backgroundColor: isDarkMode ? Colors.grey[850] : Colors.blue,
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
